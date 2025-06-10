@@ -1,0 +1,20 @@
+/* tailwind import */
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* style */
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* dark mode */
+html.dark {
+  /* bg-zinc-800 */
+  background-color: oklch(27.4% 0.006 286.033);
+}
