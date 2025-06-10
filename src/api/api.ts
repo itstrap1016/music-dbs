@@ -26,7 +26,7 @@ export async function searchPreview(query: string, searchType: string) {
 
   const url = `${API_URL}?method=${method}&${searchType}=${encodeURIComponent(
     query
-  )}&api_key=${API_KEY}&format=json&limit=100`;
+  )}&api_key=${API_KEY}&format=json&limit=500`;
 
   try {
     const response = await fetch(url);

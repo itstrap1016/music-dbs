@@ -32,7 +32,7 @@ function SearchInput() {
   }, []);
 
   useEffect(() => {
-    if (hasTyped && query && preview.length > 0) {
+    if (hasTyped && query.trim() && preview.length > 0) {
       setPreviewVisible(true);
     } else {
       setPreviewVisible(false);
@@ -41,9 +41,9 @@ function SearchInput() {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const data = await searchPreview(query, searchType);
+      const data = await searchPreview(query.trim(), searchType);
       // const previewData = data.slice(0, 100);
-      setPreview(data);
+      setPreview(data.slice(0, 100));
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -51,8 +51,10 @@ function SearchInput() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query) {
-      navigate(`/search?query=${encodeURIComponent(query)}&type=${searchType}`);
+    if (query.trim()) {
+      navigate(
+        `/search?query=${encodeURIComponent(query.trim())}&type=${searchType}`
+      );
       setPreviewVisible(false);
       setHasTyped(false);
     }
@@ -75,14 +77,14 @@ function SearchInput() {
   };
 
   const handleInputFocus = () => {
-    if (query && preview.length > 0) {
+    if (query.trim() && preview.length > 0) {
       setPreviewVisible(true);
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setQuery(value.trim());
+    setQuery(value);
     setHasTyped(true);
   };
 
