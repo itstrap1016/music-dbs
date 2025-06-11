@@ -3,7 +3,7 @@ export interface SearchIF {
   artist?: string;
   url: string;
   listeners?: string;
-  image?: { "#text": string; size: string }[];
+  image: { "#text": string; size: string }[];
   mbid: string;
   streamable: string;
 }

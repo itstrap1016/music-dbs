@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { searchPreview } from "../../api/api";
+import { searchPreview } from "../../api/searchApi";
 import PreviewList from "./components/PreviewList";
 import Logo from "./components/Logo";
 

@@ -1,7 +1,11 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = "https://ws.audioscrobbler.com/2.0/";
 
-export async function searchPreview(query: string, searchType: string) {
+export async function searchPreview(
+  query: string,
+  searchType: string,
+  page: number = 1
+) {
   if (!query.trim()) return [];
 
   let method = "";
@@ -26,7 +30,7 @@ export async function searchPreview(query: string, searchType: string) {
 
   const url = `${API_URL}?method=${method}&${searchType}=${encodeURIComponent(
     query
-  )}&api_key=${API_KEY}&format=json&limit=500`;
+  )}&api_key=${API_KEY}&format=json&limit=100&page=${page}`;
 
   try {
     const response = await fetch(url);
