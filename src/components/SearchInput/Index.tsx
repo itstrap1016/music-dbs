@@ -13,8 +13,28 @@ function SearchInput() {
   const [preview, setPreview] = useState([]);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const intitalStickyPos = useRef<number>(0);
   const wrapperRef = useRef<HTMLFormElement>(null);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    intitalStickyPos.current =
+      wrapperRef.current?.getBoundingClientRect().top ?? 0;
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= intitalStickyPos.current) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -42,7 +62,6 @@ function SearchInput() {
   useEffect(() => {
     const timer = setTimeout(async () => {
       const data = await searchPreview(query.trim(), searchType);
-      // const previewData = data.slice(0, 100);
       setPreview(data.slice(0, 100));
     }, 1000);
 
@@ -89,11 +108,13 @@ function SearchInput() {
   };
 
   return (
-    <div className="flex flex-col pt-12 items-center">
+    <div className="min-h-[176px] flex flex-col pt-12 items-center">
       <Logo />
       <form
         onSubmit={handleSearch}
-        className="flex gap-2 w-[1280px] items-center justify-center"
+        className={`flex gap-2 w-full items-center justify-center ${
+          isSticky && "bg-white py-2 fixed top-0 shadow-md dark:bg-zinc-800"
+        }`}
         ref={wrapperRef}
       >
         <div className="w-[600px]">

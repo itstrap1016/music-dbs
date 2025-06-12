@@ -11,6 +11,7 @@ function ResultList() {
     <>
       {type === "track" && <TrackList query={query} type={type} />}
       {type === "album" && <AlbumList query={query} type={type} />}
+      {type === "artist" && <AlbumList query={query} type={type} />}
     </>
   );
 }

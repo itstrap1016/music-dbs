@@ -5,7 +5,7 @@ import StatusMessage from "../../../components/StatusMessage";
 import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
 import CommonList from "./CommonList";
 
-function AlbumList({ query, type }: { query: string; type: string }) {
+function ArtistList({ query, type }: { query: string; type: string }) {
   const {
     data,
     isLoading,
@@ -14,7 +14,7 @@ function AlbumList({ query, type }: { query: string; type: string }) {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<SearchIF[], Error>({
-    queryKey: ["searchAlbum", query, type],
+    queryKey: ["searchArtist", query, type],
     queryFn: ({ pageParam = 1 }) =>
       searchPreview(query, type, pageParam as number),
     getNextPageParam: (lastPage, allPages) =>
@@ -40,4 +40,4 @@ function AlbumList({ query, type }: { query: string; type: string }) {
   return <CommonList items={items} lastItemRef={lastItemRef} />;
 }
 
-export default AlbumList;
+export default ArtistList;
