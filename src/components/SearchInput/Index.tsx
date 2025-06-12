@@ -22,9 +22,6 @@ function SearchInput() {
   useEffect(() => {
     intitalStickyPos.current =
       wrapperRef.current?.getBoundingClientRect().top ?? 0;
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= intitalStickyPos.current) {
         setIsSticky(true);
