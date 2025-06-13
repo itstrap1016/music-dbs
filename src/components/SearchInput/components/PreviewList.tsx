@@ -8,8 +8,6 @@ function PreviewList({
   preview: SearchIF[];
   searchType: string;
 }) {
-  console.log(preview);
-
   return (
     <div className="absolute top-14 left-0 border-gray-300 border-[1px] border-t-0 w-full rounded-b-2xl bg-white z-50 dark:border-zinc-600 dark:bg-zinc-800">
       <div className="h-[1px] border-gray-200 border-t w-[560px] mx-auto dark:border-zinc-700"></div>

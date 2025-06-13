@@ -8,7 +8,7 @@ import CommonList from "./CommonList";
 function AlbumList({ query, type }: { query: string; type: string }) {
   const {
     data,
-    isLoading,
+    isLoading: isItemsLoading,
     isError,
     fetchNextPage,
     hasNextPage,
@@ -24,18 +24,20 @@ function AlbumList({ query, type }: { query: string; type: string }) {
     initialPageParam: 1,
   });
 
+  const items = (data?.pages.flat() as SearchIF[]) ?? [];
+
   const lastItemRef = useInfiniteScroll({
-    isLoading,
+    isItemsLoading,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
   });
 
-  if (isLoading || isError) {
-    return <StatusMessage isLoading={isLoading} isError={isError} />;
-  }
+  console.log("AlbumList");
 
-  const items = (data?.pages.flat() as SearchIF[]) ?? [];
+  if (isItemsLoading || isError) {
+    return <StatusMessage isLoading={isItemsLoading} isError={isError} />;
+  }
 
   return <CommonList items={items} lastItemRef={lastItemRef} />;
 }

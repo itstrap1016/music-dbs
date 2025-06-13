@@ -56,7 +56,7 @@ function TrackList({ query, type }: { query: string; type: string }) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6 w-8 h-8 dark:text-violet-500"
+                className="size-6 w-8 h-8 text-green-500 dark:text-violet-500"
               >
                 <path
                   strokeLinecap="round"

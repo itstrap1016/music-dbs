@@ -5,9 +5,13 @@ import StatusItem from "./StatusItem";
 interface CommonListIF {
   items: SearchIF[];
   lastItemRef: (node: HTMLElement | null) => void;
+  customImage?: string;
 }
 
-function CommonList({ items, lastItemRef }: CommonListIF) {
+function CommonList({ items, lastItemRef, customImage }: CommonListIF) {
+  // console.log("items", items);
+  // console.log("customImage", customImages);
+
   return (
     <ul className="max-w-[814px] mx-auto mt-14 pb-14 flex flex-wrap">
       {items.length > 0 ? (
@@ -21,7 +25,13 @@ function CommonList({ items, lastItemRef }: CommonListIF) {
               to=""
               className="w-full h-full relative overflow-hidden group"
             >
-              {item.image[2]["#text"] ? (
+              {index === 0 && customImage ? (
+                <img
+                  src={customImage}
+                  alt={item.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-300"
+                />
+              ) : item.image[2]["#text"] ? (
                 <img
                   src={item.image[2]["#text"]}
                   alt={item.name}

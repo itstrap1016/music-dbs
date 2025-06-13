@@ -1,11 +1,22 @@
+import { useSearchParams } from "react-router-dom";
+import TrackList from "./components/TrackList";
+import AlbumList from "./components/AlbumList";
+import ArtistList from "./components/ArtistList";
 import SearchInput from "../../components/SearchInput/Index";
-import ResultList from "./components/ResultList";
 
 function SearchResult() {
+  const [searhParams] = useSearchParams();
+  const query = searhParams.get("query") || "";
+  const type = searhParams.get("type") || "";
+
   return (
     <>
       <SearchInput />
-      <ResultList />
+      <>
+        {type === "track" && <TrackList query={query} type={type} />}
+        {type === "album" && <AlbumList query={query} type={type} />}
+        {type === "artist" && <ArtistList query={query} type={type} />}
+      </>
     </>
   );
 }

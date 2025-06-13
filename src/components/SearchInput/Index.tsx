@@ -109,7 +109,7 @@ function SearchInput() {
       <Logo />
       <form
         onSubmit={handleSearch}
-        className={`flex gap-2 w-full items-center justify-center ${
+        className={`flex gap-2 w-full items-center justify-center z-50 ${
           isSticky && "bg-white py-2 fixed top-0 shadow-md dark:bg-zinc-800"
         }`}
         ref={wrapperRef}

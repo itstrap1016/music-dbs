@@ -21,7 +21,7 @@ function DarkModeBtn() {
   return (
     <button
       onClick={handleToggle}
-      className="bg-white border-[1px] border-gray-300 w-12 h-12 rounded-full flex justify-center items-center fixed bottom-8 right-8 cursor-pointer dark:bg-violet-500 dark:border-transparent"
+      className="bg-green-500 text-white w-12 h-12 rounded-full flex justify-center items-center fixed bottom-8 right-8 cursor-pointer dark:bg-violet-500"
     >
       {isToggle ? (
         <svg

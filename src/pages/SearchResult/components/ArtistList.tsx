@@ -1,14 +1,15 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { SearchIF } from "../../../types/searchTypes";
 import { searchPreview } from "../../../api/searchApi";
 import StatusMessage from "../../../components/StatusMessage";
 import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
 import CommonList from "./CommonList";
+import { fetchArtistImages } from "../../../api/googleApi";
 
 function ArtistList({ query, type }: { query: string; type: string }) {
   const {
     data,
-    isLoading,
+    isLoading: isItemsLoading,
     isError,
     fetchNextPage,
     hasNextPage,
@@ -24,20 +25,42 @@ function ArtistList({ query, type }: { query: string; type: string }) {
     initialPageParam: 1,
   });
 
+  const items = (data?.pages.flat() as SearchIF[]) ?? [];
+
+  // React Query로 이미지 검색 API 호출
+  const { data: customImage = {}, isLoading: isImageLoading } = useQuery({
+    queryKey: ["artistImages", query, type],
+    queryFn: async () => {
+      const data = await searchPreview(query, type);
+      const artistName = data[0].name;
+      return fetchArtistImages(artistName);
+    },
+    enabled: !!query && !!type,
+    // enabled: artistNames.length > 0,
+    staleTime: 1000 * 60 * 10,
+  });
+
   const lastItemRef = useInfiniteScroll({
-    isLoading,
+    isItemsLoading,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
   });
 
-  if (isLoading || isError) {
-    return <StatusMessage isLoading={isLoading} isError={isError} />;
+  if (isItemsLoading || isImageLoading) {
+    return <StatusMessage isLoading={true} isError={false} />;
+  }
+  if (isError) {
+    return <StatusMessage isLoading={false} isError={true} />;
   }
 
-  const items = (data?.pages.flat() as SearchIF[]) ?? [];
-
-  return <CommonList items={items} lastItemRef={lastItemRef} />;
+  return (
+    <CommonList
+      items={items}
+      lastItemRef={lastItemRef}
+      customImage={customImage}
+    />
+  );
 }
 
 export default ArtistList;
