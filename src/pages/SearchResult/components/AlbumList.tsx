@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import ContentLoader from "react-content-loader";
 import StatusItem from "./StatusItem";
 import type { SearchIF } from "../../../types/searchTypes";
 import { searchPreview } from "../../../api/searchApi";
-import StatusMessage from "../../../components/StatusMessage";
+import ErrorMessage from "../../../components/ErrorMessage";
 import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
 
 function AlbumList({ query, type }: { query: string; type: string }) {
@@ -34,16 +35,43 @@ function AlbumList({ query, type }: { query: string; type: string }) {
     fetchNextPage,
   });
 
-  if (isLoading || isError) {
-    return <StatusMessage isLoading={isLoading} isError={isError} />;
+  if (isError) {
+    return <ErrorMessage />;
+  }
+
+  if (isLoading) {
+    // 8개 플레이스홀더 예시
+    return (
+      <ul className="max-w-[814px] mx-auto mt-14 pb-14 grid grid-cols-4 gap-1">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <li
+            key={i}
+            className="aspect-square overflow-hidden bg-gray-200 rounded-lg flex flex-col justify-end relative"
+          >
+            <ContentLoader
+              speed={2}
+              width="100%"
+              height="100%"
+              viewBox="0 0 200 200"
+              backgroundColor="#a1a1aa" // Tailwind bg-zinc-400
+              foregroundColor="#d4d4d8" // Tailwind bg-zinc-300
+              style={{ width: "100%", height: "100%" }}
+            >
+              {/* 앨범 이미지 영역 */}
+              <rect x="0" y="0" rx="0" ry="0" width="200" height="200" />
+            </ContentLoader>
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   return (
-    <ul className="max-w-[814px] mx-auto mt-14 pb-14 flex flex-wrap gap-1">
+    <ul className="max-w-[814px] mx-auto mt-14 pb-14 grid grid-cols-4 gap-1">
       {items.length > 0 ? (
         items.map((item, index) => (
           <li
-            className="basis-[calc(25%-0.75rem)] aspect-square overflow-hidden"
+            className="aspect-square overflow-hidden"
             key={index}
             ref={index === items.length - 1 ? lastItemRef : undefined}
           >
