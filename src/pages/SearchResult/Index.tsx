@@ -1,7 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import TrackList from "./components/TrackList";
 import AlbumList from "./components/AlbumList";
-import ArtistList from "./components/ArtistList";
 import SearchInput from "../../components/SearchInput/Index";
 
 function SearchResult() {
@@ -15,7 +14,6 @@ function SearchResult() {
       <>
         {type === "track" && <TrackList query={query} type={type} />}
         {type === "album" && <AlbumList query={query} type={type} />}
-        {type === "artist" && <ArtistList query={query} type={type} />}
       </>
     </>
   );
