@@ -20,14 +20,7 @@ function TrackPlaceholder() {
             {/* 플레이 버튼 영역 */}
             <rect x="0" y="8" rx="8" ry="8" width="32" height="32" />
             {/* 트랙명 영역 */}
-            <rect
-              x="48"
-              y="14"
-              rx="4"
-              ry="4"
-              width="calc(100% - 34px)"
-              height="16"
-            />
+            <rect x="48" y="14" rx="4" ry="4" width="90%" height="16" />
           </ContentLoader>
         </li>
       ))}

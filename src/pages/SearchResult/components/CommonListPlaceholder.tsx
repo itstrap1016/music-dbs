@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-function AlbumPlaceholder() {
+function CommonListPlaceholder() {
   return (
     <ul className="max-w-[814px] mx-auto mt-14 pb-14 grid grid-cols-4 gap-1">
       {Array.from({ length: 8 }).map((_, i) => (
@@ -26,4 +26,4 @@ function AlbumPlaceholder() {
   );
 }
 
-export default AlbumPlaceholder;
+export default CommonListPlaceholder;
