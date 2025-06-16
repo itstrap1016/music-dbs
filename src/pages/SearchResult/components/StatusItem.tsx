@@ -1,5 +1,5 @@
 function StatusItem({ text }: { text: string }) {
-  return <li className="w-full text-center py-4 text-gray-400">{text}</li>;
+  return <div className="text-center py-4 text-gray-400">{text}</div>;
 }
 
 export default StatusItem;

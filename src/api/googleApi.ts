@@ -3,7 +3,6 @@ const CX = import.meta.env.VITE_CX;
 
 // Google Custom Search API로 상위 8개 아티스트 이미지 가져오기
 export async function fetchArtistImages(artistName: string) {
-  console.log(API_KEY, CX);
   try {
     const res = await fetch(
       `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
