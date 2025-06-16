@@ -21,7 +21,9 @@ export async function getTrackInfo(artist: string, track: string) {
 export async function getTrackSimilar(artist: string, track: string) {
   const url = `${API_URL}?method=track.getSimilar&artist=${encodeURIComponent(
     artist
-  )}&track=${encodeURIComponent(track)}&api_key=${API_KEY}&format=json`;
+  )}&track=${encodeURIComponent(
+    track
+  )}&api_key=${API_KEY}&format=json&limit=10`;
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch similar tracks");
