@@ -5,6 +5,8 @@ import { getTrackInfo, getTrackSimilar } from "../api/trackAPi";
 import PlayListItem from "../components/PlayListItem";
 import { useYoutubePlayer } from "../hooks/useYoutubePlayer";
 import YouTubePlayer from "../components/YouTubePlayer";
+import DetailPlaceholder from "../components/placeholders/DetailPlaceholder";
+import TrackPlaceholder from "../components/placeholders/TrackPlaceholder";
 
 interface SimilarTrackInterface {
   artist: {
@@ -40,7 +42,16 @@ function TrackDetail() {
 
   const { playerRef, handlePlayClick } = useYoutubePlayer();
 
-  console.log(infoLoading, similarLoading);
+  if (infoLoading && similarLoading) {
+    return (
+      <>
+        <SearchInput />
+        <DetailPlaceholder />
+        <div className="mt-14"></div>
+        <TrackPlaceholder />
+      </>
+    );
+  }
 
   return (
     <>
