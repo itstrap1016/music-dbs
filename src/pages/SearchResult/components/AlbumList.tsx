@@ -3,7 +3,7 @@ import type { SearchIF } from "../../../types/searchTypes";
 import { searchPreview } from "../../../api/searchApi";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
-import CommonListPlaceholder from "./CommonListPlaceholder";
+import CommonListPlaceholder from "./placeholders/CommonListPlaceholder";
 import CommonList from "./CommonList";
 
 function AlbumList({ query, type }: { query: string; type: string }) {

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import TrackPlaceholder from "./TrackPlaceholder";
+import TrackPlaceholder from "./placeholders/TrackPlaceholder";
 import type { SearchIF } from "../../../types/searchTypes";
 import { searchPreview } from "../../../api/searchApi";
 import ErrorMessage from "../../../components/ErrorMessage";

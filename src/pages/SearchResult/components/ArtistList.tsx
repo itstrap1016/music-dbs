@@ -4,7 +4,7 @@ import { searchPreview } from "../../../api/searchApi";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { useInfiniteScroll } from "../../../hooks/useInfiniteScroll";
 import CommonList from "./CommonList";
-import CommonListPlaceholder from "./CommonListPlaceholder";
+import CommonListPlaceholder from "./placeholders/CommonListPlaceholder";
 
 function ArtistList({ query, type }: { query: string; type: string }) {
   const {
