@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader";
 function TrackPlaceholder() {
   return (
     <ul className="max-w-[814px] mx-auto mt-14 pb-14">
-      {Array.from({ length: 8 }).map((_, i) => (
+      {Array.from({ length: 10 }).map((_, i) => (
         <li
           key={i}
           className="h-12 border-b-[1px] border-gray-200 dark:border-zinc-700 flex items-center px-3.5"
